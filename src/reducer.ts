@@ -15,6 +15,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         messages: action.payload,
+        hasFetchedMessages: true,
       };
     default:
       return state;

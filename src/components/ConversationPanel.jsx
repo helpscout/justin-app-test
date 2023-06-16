@@ -12,9 +12,6 @@ const ConversationPanel = () => {
 
   return (
     <div className="ConversationPanel">
-      <Heading level="h1">Hi</Heading>
-      <br />
-      <p>hellooooo</p>
       <MessageEditor text={text} setText={setText} />
       <Button size="sm" onClick={onSendMessage}>
         Click me

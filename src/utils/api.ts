@@ -9,8 +9,8 @@ const client = axios.create({
   },
 });
 
-const getSlackMessages = async (query) => {
-  const endpoint = `/slack?query=${query}`;
+export const getSlackMessages = async (query) => {
+  const endpoint = `/searchSlack?searchQuery=${query}`;
   return getData(endpoint);
 };
 
