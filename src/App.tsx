@@ -6,15 +6,15 @@ import { useReducer } from 'react';
 import reducer, { setUser, setConversation, setMessages } from './reducer.js';
 import { getSlackMessages } from './utils/api.js';
 
-const initialState = {};
+const initialState = {
+  conversation: {},
+  user: {},
+  messages: [],
+  hasFetchedMessages: false,
+};
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, {
-    conversation: {},
-    user: {},
-    messages: [],
-    hasFetchedMessages: false,
-  });
+  const [state, dispatch] = useReducer(reducer, initialState);
   const { conversation, user, messages, hasFetchedMessages } = state;
 
   useEffect(() => {
