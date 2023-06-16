@@ -1,5 +1,5 @@
 const MessageEditor = () => {
-  return <div></div>;
+  return <textarea />;
 };
 
 export default MessageEditor;
