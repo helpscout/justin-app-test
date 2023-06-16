@@ -1,22 +1,22 @@
 import MessageEditor from './MessageEditor';
 import { Button, Heading } from '@helpscout/ui-kit';
+import { useState } from 'react';
+import { createSlackThread } from '../utils/api';
 
 const ConversationPanel = () => {
-  function onClick() {
-    alert('hi');
-    HelpScout.showNotification(
-      NOTIFICATION_TYPES.SUCCESS,
-      'Hello from the sidebar apps'
-    );
-  }
+  const [text, setText] = useState('');
+
+  const onSendMessage = async () => {
+    await createSlackThread(text);
+  };
 
   return (
     <div className="ConversationPanel">
       <Heading level="h1">Hi</Heading>
       <br />
       <p>hellooooo</p>
-      <MessageEditor />
-      <Button size="sm" onClick={onClick}>
+      <MessageEditor text={text} setText={setText} />
+      <Button size="sm" onClick={onSendMessage}>
         Click me
       </Button>
     </div>
