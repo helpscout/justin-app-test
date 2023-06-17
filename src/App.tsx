@@ -5,13 +5,23 @@ import ConversationPanel from './components/ConversationPanel.jsx';
 import { useReducer } from 'react';
 import reducer, { setUser, setConversation, setMessages } from './reducer.js';
 import { getSlackMessages } from './utils/api.js';
+import MessagesList from './components/MessagesList.jsx';
+import styled from 'styled-components';
 
 const initialState = {
   conversation: {},
   user: {},
   messages: [],
   hasFetchedMessages: false,
+  soundEffects: true,
 };
+
+const AppUI = styled.div`
+  max-width: 270px;
+  width: 100vw;
+  font-family: var(--HSUIKitFontFamily) !important;
+  font-size: var(--HSUIKitFontSize) !important;
+`;
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -37,14 +47,14 @@ function App() {
   }
 
   if (messages.length) {
-    return <div>{JSON.stringify(messages)}</div>;
+    return <MessagesList messages={messages} />;
   }
 
   return (
-    <div className="App">
+    <AppUI>
       <DefaultStyle />
       <ConversationPanel />
-    </div>
+    </AppUI>
   );
 }
 
