@@ -16,13 +16,13 @@ const Sender = styled.h2`
   color: #333;
   width: 100%;
   text-align: right; // Add this
+  margin: 0px 0px 7px 0px;
 `;
 
 const MessageCard = styled.div`
-  border: 1px solid #ddd;
-  border-radius: 15px;
+  border-radius: 6px;
   padding: 0.4em 0.7em;
-  background-color: #f0f0f0;
+  background-color: rgb(235, 236, 255);
   max-width: 80%;
   word-wrap: break-word;
   font-family: var(--HSUIKitFontFamily) !important;
@@ -34,15 +34,15 @@ const FirstMessageContainer = styled(MessageContainer)`
 `;
 
 const FirstMessageCard = styled(MessageCard)`
-  border-color: #999;
-  background-color: #e0e0e0;
-  max-width: 90%;
+  background-color: rgb(249, 249, 255);
+  max-width: 88%;
+  padding: 1em;
+  margin-top: 0px;
 `;
 
 const Message = ({ message, isFirst }) => {
   return isFirst ? (
     <FirstMessageContainer>
-      <Sender>{message?.user?.display_name}</Sender>
       <FirstMessageCard>{message.text}</FirstMessageCard>
     </FirstMessageContainer>
   ) : (
@@ -54,9 +54,8 @@ const Message = ({ message, isFirst }) => {
 };
 
 const MessagesListContainer = styled.div`
-  padding: 1em;
-  max-width: 600px;
-  margin: auto;
+  margin-right: 8px;
+  margin-top: -5px;
 `;
 
 const MessagesList = ({ messages }) => {
