@@ -38,6 +38,8 @@ const FirstMessageCard = styled(MessageCard)`
   max-width: 88%;
   padding: 1em;
   margin-top: 0px;
+  box-shadow: 0px 0px 0px 1px #dfdfdf, 0px 1px 0px #c5ced6,
+    0px 1px 3px rgba(0, 0, 0, 0.1);
 `;
 
 const Message = ({ message, isFirst }) => {
