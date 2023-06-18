@@ -46,10 +46,15 @@ const FirstMessageCard = styled(MessageCard)`
     0px 1px 3px rgba(0, 0, 0, 0.1);
 `;
 
+const cleanMessageText = (text) => {
+  const textWithoutExtras = text.split(':meow_wave:')[0];
+  return textWithoutExtras;
+};
+
 const Message = ({ message, isFirst }) => {
   return isFirst ? (
     <FirstMessageContainer>
-      <FirstMessageCard>{message.text}</FirstMessageCard>
+      <FirstMessageCard>{cleanMessageText(message.text)}</FirstMessageCard>
     </FirstMessageContainer>
   ) : (
     <MessageContainer>
@@ -68,7 +73,12 @@ const MessagesList = ({ messages }) => {
   return (
     <MessagesListContainer>
       {messages.map((message, index) => (
-        <Message key={index} message={message} isFirst={index === 0} />
+        <Message
+          key={index}
+          index={index}
+          message={message}
+          isFirst={index === 0}
+        />
       ))}
     </MessagesListContainer>
   );

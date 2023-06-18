@@ -3,6 +3,7 @@ import { Button, Heading } from '@helpscout/ui-kit';
 import { useState } from 'react';
 import { createSlackThread } from '../utils/api';
 import styled from 'styled-components';
+import MessagesList from './MessagesList.jsx';
 
 const ButtonWrapper = styled.div`
   display: flex;
@@ -13,12 +14,17 @@ const ButtonWrapper = styled.div`
 
 const ConversationPanel = ({ state }) => {
   const [text, setText] = useState('');
+  const { messages } = state;
 
   const onSendMessage = async () => {
     const conversationId = state?.conversation?.id;
     const user = state?.user;
     await createSlackThread({ text, conversationId, user });
   };
+
+  if (messages.length) {
+    return <MessagesList messages={messages} />;
+  }
 
   return (
     <div className="ConversationPanel">

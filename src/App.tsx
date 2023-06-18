@@ -21,6 +21,8 @@ const AppUI = styled.div`
   width: 100vw;
   font-family: var(--HSUIKitFontFamily) !important;
   font-size: var(--HSUIKitFontSize) !important;
+  max-width: 100%;
+  overflow-x: hidden;
 `;
 
 function App() {
@@ -44,10 +46,6 @@ function App() {
 
   if (!hasFetchedMessages) {
     return null;
-  }
-
-  if (messages.length) {
-    return <MessagesList messages={messages} />;
   }
 
   return (

@@ -19,6 +19,8 @@ const TextareaUI = styled.textarea`
   &:focus {
     outline: #1292ee auto 1px;
   }
+  margin-top: 2px;
+  margin-left: 2px;
 `;
 
 const MessageEditor = ({ text, setText }) => {
