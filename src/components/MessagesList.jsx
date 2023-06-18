@@ -25,8 +25,9 @@ const MessageCard = styled.div`
   background-color: rgb(235, 236, 255);
   max-width: 80%;
   word-wrap: break-word;
-  font-family: var(--HSUIKitFontFamily) !important;
-  font-size: var(--HSUIKitFontSize) !important;
+  font-family: 'Aktiv Grotesk', 'Segoe UI', Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;
+  font-size: 14px;
 `;
 
 const FirstMessageContainer = styled(MessageContainer)`
