@@ -11,11 +11,13 @@ const ButtonWrapper = styled.div`
   width: 225px;
 `;
 
-const ConversationPanel = () => {
+const ConversationPanel = ({ state }) => {
   const [text, setText] = useState('');
 
   const onSendMessage = async () => {
-    await createSlackThread(text);
+    const conversationId = state?.conversation?.id;
+    const user = state?.user;
+    await createSlackThread({ text, conversationId, user });
   };
 
   return (
