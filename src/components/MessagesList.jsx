@@ -39,7 +39,7 @@ const FirstMessageContainer = styled(MessageContainer)`
 
 const FirstMessageCard = styled(MessageCard)`
   background-color: rgb(249, 249, 255);
-  max-width: 88%;
+  max-width: 99%;
   padding: 1em;
   margin-top: 0px;
   box-shadow: 0px 0px 0px 1px #dfdfdf, 0px 1px 0px #c5ced6,

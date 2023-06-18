@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const TextareaUI = styled.textarea`
   height: 244px;
   margin-bottom: 10px;
-  width: 225px;
+  width: 212px;
   padding: 1em;
   line-height: 1.5em;
   background-color: white;
