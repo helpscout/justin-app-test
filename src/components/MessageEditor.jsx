@@ -16,6 +16,9 @@ const TextareaUI = styled.textarea`
   background-color: rgb(249, 249, 255);
   font-family: 'Aktiv Grotesk', 'Segoe UI', Helvetica, Arial, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;
+  &:focus {
+    outline: #1292ee auto 1px;
+  }
 `;
 
 const MessageEditor = ({ text, setText }) => {

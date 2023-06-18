@@ -11,12 +11,14 @@ const MessageContainer = styled.div`
   align-items: flex-end; // Add this
 `;
 
-const Sender = styled.h2`
-  font-size: 0.9em; // Adjust as needed
+const Sender = styled.h1`
+  font-size: 0.8em; // Adjust as needed
   color: #333;
   width: 100%;
   text-align: right; // Add this
   margin: 0px 0px 7px 0px;
+  font-family: 'Aktiv Grotesk', 'Segoe UI', Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;
 `;
 
 const MessageCard = styled.div`
@@ -27,7 +29,8 @@ const MessageCard = styled.div`
   word-wrap: break-word;
   font-family: 'Aktiv Grotesk', 'Segoe UI', Helvetica, Arial, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;
-  font-size: 14px;
+  font-size: 13.3px;
+  line-height: 1.5em;
 `;
 
 const FirstMessageContainer = styled(MessageContainer)`
