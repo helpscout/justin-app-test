@@ -10,6 +10,7 @@ const ButtonWrapper = styled.div`
   align-items: flex-end;
   justify-content: flex-end;
   width: 214px;
+  margin-bottom: 10px;
 `;
 
 const ConversationPanelWrapper = styled.div`
@@ -18,10 +19,10 @@ const ConversationPanelWrapper = styled.div`
   padding-right: 8px;
 `;
 
-const Composer = ({ text, setText, onSendMessage }) => (
+const Composer = ({ text, setText, onSendMessage, hasMessages }) => (
   <>
     <MessageEditor text={text} setText={setText} />
-    <ButtonWrapper>
+    <ButtonWrapper hasMessages={hasMessages}>
       <Button size="sm" onClick={onSendMessage}>
         Send to Slack
       </Button>
@@ -42,7 +43,12 @@ const ConversationPanel = ({ state }) => {
   return (
     <ConversationPanelWrapper>
       {messages.length ? <MessagesList messages={messages} /> : null}
-      <Composer text={text} setText={setText} onSendMessage={onSendMessage} />
+      <Composer
+        text={text}
+        setText={setText}
+        onSendMessage={onSendMessage}
+        hasMessages={messages?.length}
+      />
     </ConversationPanelWrapper>
   );
 };
