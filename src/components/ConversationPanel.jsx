@@ -1,6 +1,6 @@
 import { useSpring, animated, useTransition } from 'react-spring';
 import MessageEditor from './MessageEditor';
-import { Button, Heading } from '@helpscout/ui-kit';
+import { Button } from '@helpscout/ui-kit';
 import { useState, useEffect } from 'react';
 import { createSlackThread, getSlackMessages } from '../utils/api';
 import styled from 'styled-components';
@@ -34,7 +34,7 @@ const Composer = ({ text, setText, onSendMessage, hasMessages }) => {
 
   const textAreaAnimation = useSpring({
     opacity: startAnimation ? 0 : 1,
-    delay: 400,
+    delay: 300,
   });
 
   const handleClick = () => {
@@ -61,7 +61,7 @@ const Composer = ({ text, setText, onSendMessage, hasMessages }) => {
 
 const ConversationPanel = ({ state, dispatch }) => {
   const [text, setText] = useState('');
-  const { messages } = state;
+  const { messages, thread_ts } = state;
   const [displayMessages, setDisplayMessages] = useState(messages);
   const [startListAnimation, setStartListAnimation] = useState(false);
 
@@ -74,13 +74,13 @@ const ConversationPanel = ({ state, dispatch }) => {
 
   const messagesAnimation = useSpring({
     opacity: startListAnimation ? 1 : 0,
-    delay: 600,
+    delay: 200,
   });
 
   const onSendMessage = async () => {
     const conversationId = state?.conversation?.id;
     const user = state?.user;
-    await createSlackThread({ text, conversationId, user });
+    await createSlackThread({ text, conversationId, user, thread_ts });
     setText(''); // Clear text area after sending message
     console.log('fetch');
     const messages = await getSlackMessages(conversationId);

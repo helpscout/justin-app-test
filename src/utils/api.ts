@@ -14,9 +14,14 @@ export const getSlackMessages = async (query) => {
   return getData(endpoint);
 };
 
-export const createSlackThread = async ({ text, conversationId, user }) => {
+export const createSlackThread = async ({
+  text,
+  conversationId,
+  user,
+  thread_ts,
+}) => {
   const endpoint = '/createThread';
-  return postData(endpoint, { text, conversationId, user });
+  return postData(endpoint, { text, conversationId, user, thread_ts });
 };
 
 // Function to make GET requests

@@ -11,12 +11,17 @@ const reducer = (state, action) => {
         ...state,
         conversation: action.payload,
       };
-    case 'SET_MESSAGES':
+    case 'SET_MESSAGES': {
+      const thread_ts = action.payload.length
+        ? action.payload[0].ts
+        : undefined;
       return {
         ...state,
         messages: action.payload,
         hasFetchedMessages: true,
+        thread_ts,
       };
+    }
     default:
       return state;
   }

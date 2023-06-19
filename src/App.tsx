@@ -14,6 +14,7 @@ const initialState = {
   messages: [],
   hasFetchedMessages: false,
   soundEffects: true,
+  thread_ts: undefined,
 };
 
 const AppUI = styled.div`
