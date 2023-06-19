@@ -43,7 +43,14 @@ const Composer = ({ text, setText, onSendMessage, hasMessages }) => {
 
   return (
     <>
-      <AnimatedMessageEditor style={textAreaAnimation}>
+      <AnimatedMessageEditor
+        style={{
+          ...textAreaAnimation,
+          display: textAreaAnimation.opacity.interpolate((opacity) =>
+            opacity === 0 ? 'none' : 'block'
+          ),
+        }}
+      >
         <MessageEditor
           text={text}
           setText={setText}
@@ -80,11 +87,29 @@ const ConversationPanel = ({ state, dispatch }) => {
   const onSendMessage = async () => {
     const conversationId = state?.conversation?.id;
     const user = state?.user;
+
     await createSlackThread({ text, conversationId, user, thread_ts });
     setText(''); // Clear text area after sending message
+
+    // Initial fetch
     console.log('fetch');
-    const messages = await getSlackMessages(conversationId);
+    let messages = await getSlackMessages(conversationId);
     dispatch(setMessages(messages));
+
+    //expensive polling trick for demo that will not scale
+    let count = 0;
+    const intervalId = setInterval(async () => {
+      // Fetch messages every 5 seconds
+      console.log('fetch ', count);
+      messages = await getSlackMessages(conversationId);
+      dispatch(setMessages(messages));
+
+      count += 1;
+      if (count === 12) {
+        // Stop fetching after 12 executions
+        clearInterval(intervalId);
+      }
+    }, 5000);
   };
 
   return (
