@@ -51,7 +51,7 @@ function App() {
   return (
     <AppUI>
       <DefaultStyle />
-      <ConversationPanel state={state} />
+      <ConversationPanel state={state} dispatch={dispatch} />
     </AppUI>
   );
 }

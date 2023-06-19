@@ -2,9 +2,10 @@ import { useSpring, animated, useTransition } from 'react-spring';
 import MessageEditor from './MessageEditor';
 import { Button, Heading } from '@helpscout/ui-kit';
 import { useState, useEffect } from 'react';
-import { createSlackThread } from '../utils/api';
+import { createSlackThread, getSlackMessages } from '../utils/api';
 import styled from 'styled-components';
 import MessagesList from './MessagesList.jsx';
+import { setMessages } from '../reducer.ts';
 
 const AnimatedButtonWrapper = styled(animated.div)`
   display: flex;
@@ -43,18 +44,22 @@ const Composer = ({ text, setText, onSendMessage, hasMessages }) => {
   return (
     <>
       <AnimatedMessageEditor style={textAreaAnimation}>
-        <MessageEditor text={text} setText={setText} />
+        <MessageEditor
+          text={text}
+          setText={setText}
+          hasMessages={hasMessages}
+        />
       </AnimatedMessageEditor>
       <AnimatedButtonWrapper style={buttonAnimation} hasMessages={hasMessages}>
         <Button size="sm" onClick={handleClick}>
-          Send to Slack
+          {hasMessages ? 'Reply' : 'Send to Slack'}
         </Button>
       </AnimatedButtonWrapper>
     </>
   );
 };
 
-const ConversationPanel = ({ state }) => {
+const ConversationPanel = ({ state, dispatch }) => {
   const [text, setText] = useState('');
   const { messages } = state;
   const [displayMessages, setDisplayMessages] = useState(messages);
@@ -77,6 +82,9 @@ const ConversationPanel = ({ state }) => {
     const user = state?.user;
     await createSlackThread({ text, conversationId, user });
     setText(''); // Clear text area after sending message
+    console.log('fetch');
+    const messages = await getSlackMessages(conversationId);
+    dispatch(setMessages(messages));
   };
 
   return (

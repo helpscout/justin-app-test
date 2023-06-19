@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const TextareaUI = styled.textarea`
-  height: 244px;
+  height: ${({ hasMessages }) => (hasMessages ? '100px' : '244px')};
   margin-bottom: 10px;
   width: 212px;
   padding: 1em;
@@ -23,7 +23,7 @@ const TextareaUI = styled.textarea`
   margin-left: 2px;
 `;
 
-const MessageEditor = ({ text, setText }) => {
+const MessageEditor = ({ text, setText, hasMessages }) => {
   const handleChange = (event) => {
     setText(event.target.value);
   };
@@ -31,7 +31,12 @@ const MessageEditor = ({ text, setText }) => {
   return (
     <TextareaUI
       value={text}
-      placeholder="Ask your team a question on Slack..."
+      hasMessages={hasMessages}
+      placeholder={
+        hasMessages
+          ? 'Type a message...'
+          : 'Ask your team a question on Slack...'
+      }
       onChange={handleChange}
     />
   );
