@@ -28,18 +28,31 @@ const Composer = ({ text, setText, onSendMessage, hasMessages }) => {
 
   const buttonAnimation = useSpring({
     opacity: startAnimation ? 0 : 1,
-    delay: 200,
+    delay: startAnimation ? 200 : 0, // For disappearance
+    config: { duration: 200 }, // Control the duration of animation
     onRest: startAnimation ? onSendMessage : null,
   });
 
   const textAreaAnimation = useSpring({
     opacity: startAnimation ? 0 : 1,
-    delay: 300,
+    delay: startAnimation ? 300 : 0, // For disappearance
+    config: { duration: 300 }, // Control the duration of animation
   });
 
   const handleClick = () => {
     setStartAnimation(true);
   };
+
+  // Adjust this useEffect hook
+  useEffect(() => {
+    if (startAnimation) {
+      const timeout = setTimeout(() => {
+        setStartAnimation(false);
+      }, 3000); // This should be the duration of the longest animation
+
+      return () => clearTimeout(timeout);
+    }
+  }, [startAnimation]);
 
   return (
     <>
