@@ -40,6 +40,7 @@ const FirstMessageContainer = styled(MessageContainer)`
 const FirstMessageCard = styled(MessageCard)`
   background-color: rgb(249, 249, 255);
   max-width: 99%;
+  width: 99%;
   padding: 1em;
   margin-top: 0px;
   box-shadow: 0px 0px 0px 1px #dfdfdf, 0px 1px 0px #c5ced6,
@@ -66,7 +67,6 @@ const Message = ({ message, isFirst }) => {
 
 const MessagesListContainer = styled.div`
   margin-right: 8px;
-  margin-top: -5px;
 `;
 
 const MessagesList = ({ messages }) => {

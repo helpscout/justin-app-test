@@ -1,7 +1,7 @@
 import { useSpring, animated, useTransition } from 'react-spring';
 import MessageEditor from './MessageEditor';
 import { Button } from '@helpscout/ui-kit';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { createSlackThread, getSlackMessages } from '../utils/api';
 import styled from 'styled-components';
 import MessagesList from './MessagesList.jsx';
@@ -84,11 +84,20 @@ const ConversationPanel = ({ state, dispatch }) => {
   const { messages, thread_ts } = state;
   const [displayMessages, setDisplayMessages] = useState(messages);
   const [startListAnimation, setStartListAnimation] = useState(false);
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     setDisplayMessages(messages);
     if (messages.length > 0) {
       setStartListAnimation(true);
+    }
+  }, [messages]);
+
+  useEffect(() => {
+    setDisplayMessages(messages);
+    if (messages.length > 0) {
+      setStartListAnimation(true);
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [messages]);
 
@@ -105,14 +114,12 @@ const ConversationPanel = ({ state, dispatch }) => {
     setText(''); // Clear text area after sending message
 
     // Initial fetch
-    console.log('fetch');
     let messages = await getSlackMessages(conversationId);
     dispatch(setMessages(messages));
 
     //expensive polling trick for demo that will not scale
     let count = 0;
     const intervalId = setInterval(async () => {
-      // Fetch messages every 5 seconds
       console.log('fetch ', count);
       messages = await getSlackMessages(conversationId);
       dispatch(setMessages(messages));
@@ -138,6 +145,7 @@ const ConversationPanel = ({ state, dispatch }) => {
         onSendMessage={onSendMessage}
         hasMessages={messages?.length}
       />
+      <div ref={messagesEndRef} />
     </ConversationPanelWrapper>
   );
 };
