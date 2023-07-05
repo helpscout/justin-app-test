@@ -31,10 +31,17 @@ function App() {
   const { conversation, user, messages, hasFetchedMessages } = state;
 
   useEffect(() => {
-    HelpScout.getApplicationContext().then(async ({ user, conversation }) => {
-      dispatch(setUser(user));
-      dispatch(setConversation(conversation));
-    });
+    console.log('effect to get context is running');
+    HelpScout.getApplicationContext()
+      .then(({ user, conversation }) => {
+        console.log('fetched context');
+        dispatch(setUser(user));
+        dispatch(setConversation(conversation));
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log('failed to fetch context');
+      });
   }, []);
 
   useEffect(() => {
