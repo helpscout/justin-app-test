@@ -33,6 +33,8 @@ function App() {
 
   useHelpScoutStyles();
 
+  HelpScout.setAppHeight(300);
+
   useEffect(() => {
     HelpScout.getApplicationContext()
       .then(({ user, conversation }) => {
