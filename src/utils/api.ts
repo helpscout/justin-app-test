@@ -1,4 +1,4 @@
-const BASE_URL = 'https://a89a-75-164-36-59.ngrok-free.app';
+const BASE_URL = 'https://d1b7-97-120-87-91.ngrok-free.app';
 
 import axios from 'axios';
 

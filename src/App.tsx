@@ -31,7 +31,6 @@ function App() {
   const { conversation, user, messages, hasFetchedMessages } = state;
 
   useEffect(() => {
-    console.log('effect to get context is running');
     HelpScout.getApplicationContext()
       .then(({ user, conversation }) => {
         console.log('fetched context');
@@ -42,7 +41,7 @@ function App() {
         console.log(err);
         console.log('failed to fetch context');
       });
-  }, []);
+  }, [conversation?.id]);
 
   useEffect(() => {
     if (conversation?.id) {
