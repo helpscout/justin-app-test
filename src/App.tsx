@@ -7,6 +7,7 @@ import reducer, { setUser, setConversation, setMessages } from './reducer.js';
 import { getSlackMessages } from './utils/api.js';
 import MessagesList from './components/MessagesList.jsx';
 import styled from 'styled-components';
+import { useHelpScoutStyles } from './utils/hooks.js';
 
 const initialState = {
   conversation: {},
@@ -29,6 +30,8 @@ const AppUI = styled.div`
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { conversation, user, messages, hasFetchedMessages } = state;
+
+  useHelpScoutStyles();
 
   useEffect(() => {
     HelpScout.getApplicationContext()
